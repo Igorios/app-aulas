@@ -4,7 +4,6 @@ import { useAlunos } from "../../../data/hooks/alunos";
 
 export default function Inicio() {
   const { alunos, getAllAlunos } = useAlunos();
-  console.log(alunos);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +14,7 @@ export default function Inicio() {
 
   return (
     <>
-    <View className="">
+    <View className="mt-20 items-center justify-center bg-white">
 
       {alunos.map((aluno) => (
         <View key={aluno.idAluno} className="mb-5">

@@ -8,7 +8,8 @@ export const useAlunos = () => {
     const getAllAlunos = useCallback(async () => {
 
         const { status, data } = await alunosService.getAllAlunos();
-        console.log(data)
+
+        console.log(status)
 
         if (status !== 200){
             throw new Error('Erro ao consultar dados da API')
