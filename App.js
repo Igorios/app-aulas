@@ -10,7 +10,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen 
+          name="Home" 
+          component={Home} 
+          options={{
+            title: "Aplicativo de Escola",
+            headerTitleStyle: {
+              fontSize: 16
+            },
+            headerStyle: {
+              backgroundColor: "#4b4b4b"
+            },
+            headerTintColor: "#fff"
+          }}
+        />
         <Stack.Screen name="Alunos" component={Alunos} />
       </Stack.Navigator>
     </NavigationContainer>
