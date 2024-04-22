@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { useAlunos } from "../../../data/hooks/alunos";
 
-export default function Inicio() {
+export default function TodosAlunos() {
   const { alunos, getAllAlunos } = useAlunos();
 
   useEffect(() => {

@@ -1,14 +1,18 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Inicio from "./ui/components/Inicio";
-import tailwind from "react-native-tailwindcss";
-import Header from "./ui/components/Header";
+import { NavigationContainer } from "@react-navigation/native"; 
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import Home from "./src/screens/Home";
+import Alunos from "./src/screens/Alunos";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View>
-      <Header />
-      <Inicio />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Alunos" component={Alunos} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
