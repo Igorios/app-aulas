@@ -1,35 +1,27 @@
-import { NavigationContainer } from "@react-navigation/native"; 
 import { Link } from "expo-router";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Text, View } from "react-native";
-
-import Home from "./screens/home";
-import Alunos from "./screens/alunos";
-import Sobre from "./screens/sobre";
-
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-function Tabs() {
-  return(
-    <Tab.Navigator>
-      <Tab.Screen name="Início" component={Home} />
-      <Tab.Screen name="Sobre" component={Sobre} />
-    </Tab.Navigator>
-  )
-}
+import Home from "../ui/components/Home";
+import { AntDesign } from '@expo/vector-icons';
 
 export default function App() {
   return (
     <>
-      <View className="p-10">
-        <Link className="mb-5" href="/screens/sobre">
-          Ir para a página SOBRE 
-        </Link>
-        <Link className="" href="/screens/dashboard">
-          Ir para a página Painel de Controle 
-        </Link>
+      <View>
+
+        <Home />
+
+        {/* <Link className="ml-10" href="/screens/dashboard">
+          Ir para a página Painel de Controle
+        </Link> */}
+
+        <View className="ml-10 mt-5">
+          <Text className="text-2xl mb-2">Conheça os alunos</Text>
+          <Text className="text-sm py-2">Tenha a lista de todos os alunos, além de todas as {'\n'} informações detalhadas deles.</Text>
+          <Link className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-center text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-44 p-3" href="/screens/sobre">
+            <Text>Visualizar os Alunos <AntDesign name="arrowright" color="white" /></Text>
+          </Link>
+        </View>
+
       </View>
     </>
   );
