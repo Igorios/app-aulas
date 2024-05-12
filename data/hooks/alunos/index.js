@@ -9,17 +9,28 @@ export const useAlunos = () => {
 
         const { status, data } = await alunosService.getAllAlunos();
 
-        console.log(status)
+        if (status !== 200){
+            throw new Error('Erro ao consultar dados da API')
+        }
+        setAlunos(data);
+    }, []);
+
+
+    const getAlunoById = useCallback(async(id) => {
+        const { status, data } = await alunosService.getAlunosById(id);
 
         if (status !== 200){
             throw new Error('Erro ao consultar dados da API')
         }
         setAlunos(data);
-    }, [])
+        return data;
+
+    }, []);
 
     return {
         alunos,
-        getAllAlunos
+        getAllAlunos,
+        getAlunoById
     }
 
 

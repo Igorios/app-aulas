@@ -1,8 +1,9 @@
 import { Api } from "../providers";
 
 const getAllAlunos = () => Api.get('/alunos');
-console.log(getAllAlunos);
+const getAlunosById = (id) => Api.get(`/alunos/${id}`);
 
 export const alunosService = {
-    getAllAlunos
+    getAllAlunos,
+    getAlunosById
 }
