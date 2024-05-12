@@ -2,6 +2,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Text, View } from "react-native";
 import { useAlunos } from "../../../../data/hooks/alunos";
 import { useEffect, useLayoutEffect, useState } from "react";
+import { formatarData } from "../../../../ui/utils";
 
 export default function ExibirAluno() {
   const navigation = useNavigation();
@@ -50,17 +51,16 @@ export default function ExibirAluno() {
             </Text>
             <Text>
               Nasceu em:{" "}
-              <Text className="font-bold">{detalheAluno?.nascimento}</Text>
+              <Text className="font-bold">{formatarData(detalheAluno?.nascimento)}</Text>
             </Text>
             <Text>
               Gênero:{" "}
               <Text className="font-bold">{detalheAluno?.genero}</Text>
             </Text>
             <Text>
-                Pertence a turma::{" "}
+                Pertence a turma:{" "}
               <Text className="font-bold">{detalheAluno?.turma.descricao}</Text>
             </Text>
-
 
           </View>
         </View>
