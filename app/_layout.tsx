@@ -12,6 +12,7 @@ export default function Layout() {
     >
         <Stack.Screen name="index" options={{title: "Home"}}/>
         <Stack.Screen name="screens/sobre/index" options={{title: "Sobre o App"}}/>
+        <Stack.Screen name="screens/alunos/todosAlunos/index" options={{title: "Alunos"}}/>
         <Stack.Screen name="screens/(tabs)" options={{headerShown: false}} />
     </Stack>
     

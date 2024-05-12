@@ -1,8 +1,11 @@
 {
   "expo": {
     "name": "frontend",
-    "scheme": "frontend", 
-    "platforms": ["ios", "android"],
+    "scheme": "frontend",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "extra": {
       "eas": {
@@ -28,9 +31,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },      
+      },
       "package": "com.igorios.frontend",
       "packageType": "APK"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
