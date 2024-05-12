@@ -1,6 +1,7 @@
 import { Text, View, ScrollView } from "react-native";
 import { useAlunos } from "../../../../data/hooks/alunos";
 import { useEffect } from "react";
+import { Link } from "expo-router";
 
 export default function TodosAlunos() {
   const { alunos, getAllAlunos } = useAlunos();
@@ -29,20 +30,22 @@ export default function TodosAlunos() {
                 key={aluno.idAluno}
                 className="mb-5 bg-gray-300 rounded-lg w-full"
               >
-                <View className="ml-2 p-5">
-                  <Text>
-                    Nome do aluno:{" "}
-                    <Text className="font-bold">{aluno.nomeAluno}</Text>
-                  </Text>
-                  <Text>
-                    Gênero:{" "}
-                    <Text className="font-bold">{aluno.genero}</Text>
-                  </Text>
-                  <Text>
-                    Turma:{" "}
-                    <Text className="font-bold">{aluno.turma.descricao}</Text>
-                  </Text>
-                </View>
+                <Link href={`screens/alunos/todosAlunos/${aluno.idAluno}/`}>
+                  <View className="ml-2 p-5">
+                    <Text>
+                      Nome do aluno:{" "}
+                      <Text className="font-bold">{aluno.nomeAluno}</Text>
+                    </Text>
+                    <Text>
+                      Gênero:{" "}
+                      <Text className="font-bold">{aluno.genero}</Text>
+                    </Text>
+                    <Text>
+                      Turma:{" "}
+                      <Text className="font-bold">{aluno.turma.descricao}</Text>
+                    </Text>
+                  </View>
+                </Link>
               </View>
             ))}
           </View>
