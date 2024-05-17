@@ -6,7 +6,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "extra": {
       "eas": {
         "projectId": "095f7444-5db9-4a64-867b-5bbd99a5a933"
