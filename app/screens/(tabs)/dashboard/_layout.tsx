@@ -22,7 +22,7 @@ export default function Layout() {
         <Tabs.Screen
           name="criarAluno/index"
           options={{
-            title: "Novo aluno",
+            title: "Registrando aluno",
             tabBarIcon: ({ focused, color, size }) => {
               return <FontAwesome name="user-plus" color={color} size={size} />;
             },
