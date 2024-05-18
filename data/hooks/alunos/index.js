@@ -15,6 +15,14 @@ export const useAlunos = () => {
         setAlunos(data);
     }, []);
 
+    const createAluno = useCallback(async(aluno) => {
+        const { status } = await siteService.createAluno(aluno)
+
+        if (status !== 200){
+           throw new Error('Erro ao enviar os dados para API')
+        }
+        
+    }, [])
 
     const getAlunoById = useCallback(async(id) => {
         const { status, data } = await alunosService.getAlunosById(id);
@@ -30,7 +38,8 @@ export const useAlunos = () => {
     return {
         alunos,
         getAllAlunos,
-        getAlunoById
+        getAlunoById,
+        createAluno
     }
 
 
