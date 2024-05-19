@@ -10,15 +10,19 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
+import { useAlunos } from "../../../../../data/hooks/alunos";
 
 export default function CreateAluno() {
   const [date, setDate] = useState(null);
   const [show, setShow] = useState(false);
 
+  const { createAluno } = useAlunos();
+
   const [aluno, setAluno] = useState({
-    nomeAluno: "",
+    nome: "",
     nascimento: date || "",
     genero: "",
+    turma_id: 1,
   });
 
   const handleSetValue = (value, name) => {
@@ -37,13 +41,34 @@ export default function CreateAluno() {
     setShow(false);
     setDate(currentDate);
 
-    handleSetValue(currentDate.toLocaleDateString(), "nascimento");
+    const formattedDate = currentDate.toISOString().split("T")[0];
+
+    handleSetValue(formattedDate, "nascimento");
   };
 
   console.log(aluno);
 
-  const handleCreateAluno = () => {
-    console.log("Ok");
+  const handleClear = () => {
+    setAluno({
+      nome: "",
+      nascimento: "",
+      genero: "",
+      turma_id: 1,
+    });
+    setDate(null); 
+  };
+
+  const handleCreateAluno = async () => {
+    try {
+      const response = await createAluno(aluno);
+      if (response !== null) {
+        alert("Aluno registrado com sucesso");
+        handleClear();
+      }
+    } catch (e) {
+      console.log(e);
+      alert("Erro ao registrar aluno");
+    }
   };
 
   return (
@@ -52,7 +77,8 @@ export default function CreateAluno() {
         <View className="mb-4">
           <Text className="font-medium mb-2 text-sm text-gray-700">Nome</Text>
           <TextInput
-            onChangeText={(text) => handleSetValue(text, "nomeAluno")}
+            onChangeText={(text) => handleSetValue(text, "nome")}
+            value={aluno.nome}
             className="h-14 border border-gray-300 rounded-md px-4 bg-gray-100"
             placeholder="Nome..."
             keyboardType="default"
@@ -69,8 +95,8 @@ export default function CreateAluno() {
             onValueChange={handleGenderChange}
           >
             <Picker.Item label="Selecione o gênero..." value="" />
-            <Picker.Item label="Masculino" value="Masculino" />
-            <Picker.Item label="Feminino" value="Feminino" />
+            <Picker.Item label="Masculino" value="M" />
+            <Picker.Item label="Feminino" value="F" />
           </Picker>
         </View>
 
@@ -78,7 +104,11 @@ export default function CreateAluno() {
           <Text className="font-medium mb-2 text-sm text-gray-700">
             Data de Nascimento
           </Text>
-          {date !== null && <Text className="font-semibold text-base">{date.toLocaleDateString()}</Text>}
+          {date !== null && (
+            <Text className="font-semibold text-base">
+              {date.toLocaleDateString()}
+            </Text>
+          )}
 
           <TouchableOpacity
             style={styles.botaoData}
@@ -124,15 +154,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   botaoData: {
-    backgroundColor: '#959595',
+    backgroundColor: "#959595",
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   textoBotaoData: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
