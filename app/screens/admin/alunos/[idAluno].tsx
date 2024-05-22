@@ -1,11 +1,13 @@
-import { useLocalSearchParams, useNavigation } from "expo-router";
-import { Text, View } from "react-native";
+import { Link, useLocalSearchParams, useNavigation } from "expo-router";
+import { Button, Text, View } from "react-native";
 import { useAlunos } from "../../../../data/hooks/alunos";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { formatarData } from "../../../../ui/utils";
 import Loading from "../../../../ui/components/Loading";
 
 export default function ExibirAluno() {
+
+    
     
   const navigation = useNavigation();
 
@@ -73,6 +75,11 @@ export default function ExibirAluno() {
                   </Text>
                 </Text>
               </View>
+              <Link 
+                className="text-white bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-center text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-44 p-1 mt-5"
+                href={`/screens/admin/alunos/editar/${detalheAluno?.idAluno}`}>
+                    Editar Aluno
+                </Link>
             </View>
           </View>
         </>

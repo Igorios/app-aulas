@@ -42,7 +42,7 @@ export default function TodosAlunos() {
                       <View className="ml-2 p-5">
                         <Text>
                           Nome do aluno:{" "}
-                          <Text className="font-bold">{aluno.nomeAluno}</Text>
+                          <Text className="font-bold">{aluno.nome}</Text>
                         </Text>
                         <Text>
                           Gênero:{" "}

@@ -38,12 +38,12 @@ export default function dashboard() {
                     key={aluno.idAluno}
                     className="mb-5 bg-gray-300 rounded-lg w-full"
                   >
-                    <Link href={``}>
+                    <Link href={`/screens/admin/alunos/${aluno.idAluno}/`}>
                       
                       <View className="ml-2 p-2">
                         <Text>
                           Nome do aluno:{" "}
-                          <Text className="font-bold">{aluno.nomeAluno}</Text>
+                          <Text className="font-bold">{aluno.nome}</Text>
                         </Text>
                         <Text>
                           Turma:{" "}
