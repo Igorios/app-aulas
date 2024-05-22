@@ -14,16 +14,13 @@ import { useAlunos } from "../../../../../data/hooks/alunos";
 import Loading from "../../../../../ui/components/Loading";
 import { formatarData } from "../../../../../ui/utils";
 
-
 export default function EditarAluno() {
-
-    const [date, setDate] = useState(null);
-    const [show, setShow] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const { idAluno } = useLocalSearchParams();
-    const navigation = useNavigation();
-    const { getAlunoById } = useAlunos();
-
+  const [date, setDate] = useState(null);
+  const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { idAluno } = useLocalSearchParams();
+  const navigation = useNavigation();
+  const { getAlunoById } = useAlunos();
 
   const [aluno, setAluno] = useState({
     nome: "",
@@ -46,6 +43,13 @@ export default function EditarAluno() {
     fetchDetalhesAlunos();
   }, [idAluno]);
 
+  const handleSetValue = (value, name) => {
+    setAluno((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -54,7 +58,7 @@ export default function EditarAluno() {
 
     const formattedDate = currentDate.toISOString().split("T")[0];
   };
-  console.log(aluno)
+  console.log(aluno);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -75,6 +79,7 @@ export default function EditarAluno() {
               </Text>
               <TextInput
                 value={aluno.nome}
+                onChangeText={(text) => handleSetValue(text, "nome")}
                 className="h-14 border border-gray-300 rounded-md px-4 bg-gray-100"
                 keyboardType="default"
               />
@@ -84,7 +89,15 @@ export default function EditarAluno() {
               Selecione o gênero
             </Text>
             <View style={styles.pickerContainer}>
-              <Picker>
+              <Picker
+                selectedValue={aluno.genero}
+                onValueChange={(itemValue) =>
+                  setAluno((prevState) => ({
+                    ...prevState,
+                    genero: itemValue,
+                  }))
+                }
+              >
                 <Picker.Item label="Selecione o gênero..." value="" />
                 <Picker.Item label="Masculino" value="M" />
                 <Picker.Item label="Feminino" value="F" />
@@ -95,11 +108,9 @@ export default function EditarAluno() {
               <Text className="font-medium mb-2 text-sm text-gray-700">
                 Data de Nascimento
               </Text>
-             {
-                aluno.nascimento && (
-                    <><Text>{formatarData(aluno.nascimento)}</Text></>
-                )
-             }
+              {aluno.nascimento && (
+                <Text>{formatarData(aluno.nascimento)}</Text>
+              )}
               <TouchableOpacity
                 style={styles.botaoData}
                 onPress={() => setShow(true)}
