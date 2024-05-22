@@ -33,11 +33,23 @@ export const useAlunos = () => {
 
     }, []);
 
+    const putAlunoById = async (id, aluno) => {
+        const { status, data } = await alunosService.putAlunoById(id, aluno);
+    
+        if (status !== 200) {
+          throw new Error('Erro ao atualizar aluno');
+        }
+    
+        setAlunos(data)
+        return data;
+      };
+
     return {
         alunos,
         getAllAlunos,
         getAlunoById,
-        createAluno
+        createAluno,
+        putAlunoById
     }
 
 

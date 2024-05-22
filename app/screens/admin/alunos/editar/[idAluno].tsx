@@ -20,9 +20,10 @@ export default function EditarAluno() {
   const [loading, setLoading] = useState(true);
   const { idAluno } = useLocalSearchParams();
   const navigation = useNavigation();
-  const { getAlunoById } = useAlunos();
+  const { putAlunoById, alunos, getAlunoById } = useAlunos();
 
   const [aluno, setAluno] = useState({
+    id: idAluno,
     nome: "",
     nascimento: date || "",
     genero: "",
@@ -32,7 +33,15 @@ export default function EditarAluno() {
   const fetchDetalhesAlunos = async () => {
     try {
       const data = await getAlunoById(idAluno);
-      setAluno(data);
+      setAluno({
+        id: data.idAluno || idAluno,
+        nome: data.nome || "",
+        nascimento: data.nascimento || date || "",
+        genero: data.genero || "",
+        turma_id: 1,
+      });
+  
+
       setLoading(false);
     } catch (error) {
       console.error("Erro ao buscar dados da Api.", error);
@@ -58,7 +67,21 @@ export default function EditarAluno() {
 
     const formattedDate = currentDate.toISOString().split("T")[0];
   };
-  console.log(aluno);
+
+  const handleUpdateAluno = async () => {
+      console.log(aluno)
+    try {
+    
+      await putAlunoById(idAluno, aluno);
+
+      alert("Aluno atualizado com sucesso");
+     
+    } catch (e) {
+        console.log("Erro: "+e);
+        alert("Erro ao atualizar o aluno");
+    }
+  }
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -131,7 +154,9 @@ export default function EditarAluno() {
               )}
             </View>
 
-            <TouchableOpacity className="items-center rounded-xl mt-5 bg-blue-500 py-1.5 border-none">
+            <TouchableOpacity className="items-center rounded-xl mt-5 bg-blue-500 py-1.5 border-none"
+            onPress={handleUpdateAluno}
+            >
               <Text className="text-white text-base">Editar</Text>
             </TouchableOpacity>
           </ScrollView>
