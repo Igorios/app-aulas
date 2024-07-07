@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "frontend",
+    "name": "Aplicativo de escola",
+    "slug": "frontend",
     "scheme": "frontend",
     "platforms": [
       "ios",
@@ -13,11 +14,11 @@
       }
     },
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/capa.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "icon": "./assets/icon.png",
+    "icon": "./assets/capa.png",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -29,7 +30,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/capa.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.igorios.frontend",
