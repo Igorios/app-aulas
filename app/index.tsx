@@ -1,13 +1,39 @@
 import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import Home from "../ui/components/Home";
 import { AntDesign } from '@expo/vector-icons';
+import { useEffect, useState } from "react";
 
 export default function App() {
+
+  const [visibilidadeVideo, setVisibilidadeVideo] = useState(true);
+
+  useEffect(() => {
+    
+    const timer = setTimeout(() => {
+      setVisibilidadeVideo(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+
+  }, []);
+
+
+  if (visibilidadeVideo) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Image 
+          source={{ uri: 'https://igorborgesweb.com/videos/inicio.gif' }}  
+          style={{ width: '100%', height: '100%' }} 
+        />
+      </View>
+    );
+  }
+
   return (
     <>
       <View>
-
+    
         <Home />
 
         <View className="ml-10 mt-5">
