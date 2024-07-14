@@ -27,6 +27,7 @@ export default function TodosAlunos() {
   useEffect(() => {
     const fetchData = async () => {
       await getAllAlunos();
+      setLoading(false);
     };
     fetchData();
   }, []);
