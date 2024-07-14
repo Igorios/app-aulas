@@ -1,6 +1,6 @@
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, RefreshControl } from "react-native";
 import { useAlunos } from "../../../../data/hooks/alunos";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loading from "../../../../ui/components/Loading";
 import { Link } from "expo-router";
 
@@ -8,6 +8,20 @@ export default function dashboard() {
   const { alunos, getAllAlunos } = useAlunos();
   const [loading, setLoading] = useState(true);
   const [cont, setCont] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    const fetchData = async () => {
+      await getAllAlunos();
+      setLoading(false);
+    };
+    fetchData();
+
+    setRefreshing(false);
+    
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +45,11 @@ export default function dashboard() {
         ) : (
           <>
           <View className="h-4/6">
-            <ScrollView>
+            <ScrollView
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
+            >
               <View className="items-center">
                 {alunos.map((aluno) => (
                   <View

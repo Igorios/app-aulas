@@ -6,8 +6,6 @@ import { formatarData } from "../../../../ui/utils";
 import Loading from "../../../../ui/components/Loading";
 
 export default function ExibirAluno() {
-
-    
     
   const navigation = useNavigation();
 
@@ -15,7 +13,7 @@ export default function ExibirAluno() {
   const { idAluno } = useLocalSearchParams();
   const { getAlunoById } = useAlunos();
   const [detalheAluno, setDetalheAlunos] = useState();
-  const [refreshing, setRefreshing] =useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
