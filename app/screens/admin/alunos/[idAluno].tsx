@@ -1,7 +1,7 @@
 import { Link, useLocalSearchParams, useNavigation } from "expo-router";
-import { Button, Text, View } from "react-native";
+import { Button, RefreshControl, ScrollView, Text, View } from "react-native";
 import { useAlunos } from "../../../../data/hooks/alunos";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { formatarData } from "../../../../ui/utils";
 import Loading from "../../../../ui/components/Loading";
 
@@ -15,6 +15,20 @@ export default function ExibirAluno() {
   const { idAluno } = useLocalSearchParams();
   const { getAlunoById } = useAlunos();
   const [detalheAluno, setDetalheAlunos] = useState();
+  const [refreshing, setRefreshing] =useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    const fetchData = async () => {
+      await fetchDetalhesAlunos();
+      setLoading(false);
+    };
+    fetchData();
+
+    setRefreshing(false);
+    
+  }, []);
 
   const fetchDetalhesAlunos = async () => {
     try {
@@ -42,6 +56,12 @@ export default function ExibirAluno() {
         <Loading />
       ) : (
         <>
+        <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        >
+
           <View className="bg-gray-800 w-full h-40 flex items-center justify-center">
             <View>
               <Text className="text-zinc-200 text-2xl mb-6 text-center font-medium">
@@ -82,6 +102,8 @@ export default function ExibirAluno() {
                 </Link>
             </View>
           </View>
+
+        </ScrollView>
         </>
       )}
     </>

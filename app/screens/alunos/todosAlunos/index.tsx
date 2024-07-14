@@ -1,6 +1,6 @@
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, RefreshControl } from "react-native";
 import { useAlunos } from "../../../../data/hooks/alunos";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "expo-router";
 import Loading from "../../../../ui/components/Loading";
 
@@ -8,6 +8,21 @@ export default function TodosAlunos() {
   const { alunos, getAllAlunos } = useAlunos();
 
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] =useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    const fetchData = async () => {
+      await getAllAlunos();
+      setLoading(false);
+    };
+    fetchData();
+
+    setRefreshing(false);
+    
+
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +45,11 @@ export default function TodosAlunos() {
               </Text>
             </View>
           </View>
-          <ScrollView className="bg-gray-200 w-full h-32 -mt-10 rounded-t-3xl">
+          <ScrollView 
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          className="bg-gray-200 w-full h-32 -mt-10 rounded-t-3xl">
             <View className="p-5">
               <View className="items-center">
                 {alunos.map((aluno) => (
