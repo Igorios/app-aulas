@@ -27,7 +27,6 @@ export default function TodosAlunos() {
   useEffect(() => {
     const fetchData = async () => {
       await getAllAlunos();
-      setLoading(false);
     };
     fetchData();
   }, []);
@@ -46,10 +45,11 @@ export default function TodosAlunos() {
             </View>
           </View>
           <ScrollView 
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-          className="bg-gray-200 w-full h-32 -mt-10 rounded-t-3xl">
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            className="bg-gray-200 w-full h-32 -mt-10 rounded-t-3xl"
+          >
             <View className="p-5">
               <View className="items-center">
                 {alunos.map((aluno) => (
