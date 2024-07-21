@@ -8,7 +8,7 @@ export default function TodosAlunos() {
   const { alunos, getAllAlunos } = useAlunos();
 
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] =useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

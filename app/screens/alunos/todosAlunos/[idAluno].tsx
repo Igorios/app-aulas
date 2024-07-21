@@ -1,7 +1,8 @@
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Text, View } from "react-native";
-import { useAlunos } from "../../../../data/hooks/alunos";
 import { useEffect, useLayoutEffect, useState } from "react";
+import { AlunoInterface } from "../../../../data/@types/AlunoInterface";
+import { useAlunos } from "../../../../data/hooks/alunos";
 import { formatarData } from "../../../../ui/utils";
 import Loading from "../../../../ui/components/Loading";
 
@@ -12,11 +13,11 @@ export default function ExibirAluno() {
   const [loading, setLoading] = useState(true);
   const { idAluno } = useLocalSearchParams();
   const { getAlunoById } = useAlunos();
-  const [detalheAluno, setDetalheAlunos] = useState();
+  const [detalheAluno, setDetalheAlunos] = useState<AlunoInterface>();
 
   const fetchDetalhesAlunos = async () => {
     try {
-      const data = await getAlunoById(idAluno);
+      const data = await getAlunoById(Number(idAluno));
       setDetalheAlunos(data);
       setLoading(false);
     } catch (error) {

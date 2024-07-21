@@ -1,7 +1,8 @@
 import { Link, useLocalSearchParams, useNavigation } from "expo-router";
-import { Button, RefreshControl, ScrollView, Text, View } from "react-native";
-import { useAlunos } from "../../../../data/hooks/alunos";
+import { RefreshControl, ScrollView, Text, View } from "react-native";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { AlunoInterface } from "../../../../data/@types/AlunoInterface";
+import { useAlunos } from "../../../../data/hooks/alunos";
 import { formatarData } from "../../../../ui/utils";
 import Loading from "../../../../ui/components/Loading";
 
@@ -12,7 +13,7 @@ export default function ExibirAluno() {
   const [loading, setLoading] = useState(true);
   const { idAluno } = useLocalSearchParams();
   const { getAlunoById } = useAlunos();
-  const [detalheAluno, setDetalheAlunos] = useState();
+  const [detalheAluno, setDetalheAlunos] = useState<AlunoInterface>();
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
@@ -30,7 +31,7 @@ export default function ExibirAluno() {
 
   const fetchDetalhesAlunos = async () => {
     try {
-      const data = await getAlunoById(idAluno);
+      const data = await getAlunoById(Number(idAluno));
       setDetalheAlunos(data);
       setLoading(false);
     } catch (error) {

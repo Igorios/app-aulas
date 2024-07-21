@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { AlunoInterface } from "../../../../../data/@types/AlunoInterface";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useAlunos } from "../../../../../data/hooks/alunos";
@@ -32,7 +33,7 @@ export default function EditarAluno() {
 
   const fetchDetalhesAlunos = async () => {
     try {
-      const data = await getAlunoById(idAluno);
+      const data = await getAlunoById(Number(idAluno));
       setAluno({
         id: data.idAluno || idAluno,
         nome: data.nome || "",
@@ -69,10 +70,10 @@ export default function EditarAluno() {
   };
 
   const handleUpdateAluno = async () => {
-      console.log(aluno)
+
     try {
-    
-      await putAlunoById(idAluno, aluno);
+
+      await putAlunoById(Number(idAluno), aluno);
 
       alert("Aluno atualizado com sucesso");
      
